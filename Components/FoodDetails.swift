@@ -3,17 +3,13 @@ import SwiftUI
 struct FoodDetails: View {
     
     @Binding var show : Bool
-    @State private var showVegan = false
+    @State private var showHistory = false
     @State private var selectedTab = 0
        
     var img : String
     var title : String
-    var subTitle : String
-    var bgColor : Color
-    var processes : [String]
+    var topics : [[String]]
     var description : String
-    var ingredientOne : [String]
-    var ingredientTwo : [String]
     
     var body: some View {
         ZStack {
@@ -35,7 +31,6 @@ struct FoodDetails: View {
                     .background(.ultraThinMaterial, in : Circle())
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-            .padding(.top, 8)
             .padding(.trailing, 30)
         }.navigationBarBackButtonHidden()
     }
@@ -52,7 +47,6 @@ struct FoodDetails: View {
             Image(img)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .background(bgColor)
         )
         .mask(
             RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -79,62 +73,25 @@ struct FoodDetails: View {
     
     var detail : some View {
         VStack {
+    
             VStack {
-                    Text("Ingredient")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(.brown)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-
-                VStack {
-                    HStack (alignment: .top, spacing: 20){
-                        ForEach(ingredientOne, id: \.self) { ingredientOne in
-                            VStack {
-                                Image(ingredientOne)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 90, height: 90)
-                                    .padding(5)
-                                
-                                Text(ingredientOne)
-                                    .font(.system(size: 17))
-                                    .foregroundColor(.brown)
-                            }
-                        }
-                    }
-                
-                    HStack (alignment: .top, spacing: 20){
-                        ForEach(ingredientTwo, id: \.self) { ingredientTwo in
-                            VStack {
-                                Image(ingredientTwo)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 90, height: 90)
-                                    .padding(5)
-                                
-                                Text(ingredientTwo)
-                                    .font(.system(size: 17))
-                                    .foregroundColor(.brown)
-                            }
-
-                        }
-                    }
-                }
-                    Text("Process")
-                        .font(.title)
+                ForEach(topics, id : \.self) { topic in
+                    Text(topic[0])
+                        .font(.title2)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, 20)
                         .foregroundColor(.brown)
-
-                    ForEach(processes, id : \.self) { process in
-                            BulletPoint(text: process)
-                            .padding(.top, 10)
-                            .lineSpacing(3)
-                            .foregroundColor(.brown)
+                    
+                    Text(topic[1])
+                        .font(.title3)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 20)
+                        .foregroundColor(.brown)
                 }
             }
             .padding(20)
+            .transition(.asymmetric(insertion: .scale, removal: .opacity))
         }
         .padding(.top, 120)
     }
@@ -147,9 +104,9 @@ struct BulletPoint: View {
         HStack {
             Text("•")
                 .font(.headline)
-                .padding(.trailing, 5)
+                .padding(.trailing)
             Text(text)
-                .font(.title3)
+                .font(.system(size: 20))
         }
     }
 }
@@ -157,7 +114,7 @@ struct BulletPoint: View {
 struct FoodDetails_Previews: PreviewProvider {
 
     static var previews: some View {
-        FoodDetails(show: .constant(true), img: "", title: "", subTitle: "", bgColor: .brown, processes: [""], description: "", ingredientOne: [""], ingredientTwo: [""])
+        FoodDetails(show: .constant(true), img: "", title: "", topics: [[""]], description: "")
     }
 }
 

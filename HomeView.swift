@@ -6,37 +6,19 @@ struct HomeView: View {
         NavigationView {
             VStack {
                 VStack {
-                    Text("Myanmar".uppercased())
-                        .font(.title2)
-                        .fontWeight(.bold)
-
-                    Text("Traditional Foods".uppercased())
-                        .font(.title3)
+                    Text("Welcome To Myanmar")
+                        .font(.system(size: 28))
                         .fontWeight(.bold)
                 }
-                .foregroundColor(Color.brown)
-                .padding(.top,100)
-
-
-//                Text("Myanmar Traditional Food".uppercased())
-//                    .fontWeight(.bold)
-//                    .foregroundColor(.brown)
-//                    .font(.title2)
-//                    .scaledToFit()
-//                    .padding(.top,100)
-
-                
+                .foregroundColor(Color.white)
+                .padding(.top,170)
+                .padding(.bottom, 50)
+                .lineSpacing(19)
                 
                 Spacer()
-                
-                Image("mote lone")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                
-                Spacer()
-                
+                                
                 NavigationLink(destination: MenuView()) {
-                    Text("START COOKING")
+                    Text("Get Start")
                         .fontWeight(.bold)
                         .frame(width: 280, height: 50, alignment: .center)
                         .foregroundColor(.white)
@@ -46,6 +28,9 @@ struct HomeView: View {
                 }
                 .padding(.bottom, 150)
             }
+            .background(
+                Image("logo1")
+            )
         }
     }
 }
