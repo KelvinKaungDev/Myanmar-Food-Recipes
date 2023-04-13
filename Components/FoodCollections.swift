@@ -15,7 +15,7 @@ struct FoodCollections: View {
             Image(img)
                 .resizable()
                 .frame(maxWidth: .infinity)
-                .aspectRatio(contentMode: .fit)
+                .aspectRatio(contentMode: .fill)
             
             Text(title.uppercased())
                 .font(.title2)

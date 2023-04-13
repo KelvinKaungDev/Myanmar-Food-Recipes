@@ -13,8 +13,8 @@ struct FoodBrain : Identifiable, Hashable{
         self.id = id
         self.title = title
         self.image = image
-        self.description = description
         self.topic = topic
+        self.description = description
     }
 }
 

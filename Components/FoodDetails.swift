@@ -3,8 +3,8 @@ import SwiftUI
 struct FoodDetails: View {
     
     @Binding var show : Bool
-    @State private var showHistory = false
     @State private var selectedTab = 0
+    @State private var showHistory = false
        
     var img : String
     var title : String
@@ -86,7 +86,7 @@ struct FoodDetails: View {
                     Text(topic[1])
                         .font(.title3)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.top, 20)
+                        .padding(.top, 2)
                         .foregroundColor(.brown)
                 }
             }
@@ -97,22 +97,7 @@ struct FoodDetails: View {
     }
 }
 
-struct BulletPoint: View {
-    var text: String
-    
-    var body: some View {
-        HStack {
-            Text("•")
-                .font(.headline)
-                .padding(.trailing)
-            Text(text)
-                .font(.system(size: 20))
-        }
-    }
-}
-
 struct FoodDetails_Previews: PreviewProvider {
-
     static var previews: some View {
         FoodDetails(show: .constant(true), img: "", title: "", topics: [[""]], description: "")
     }

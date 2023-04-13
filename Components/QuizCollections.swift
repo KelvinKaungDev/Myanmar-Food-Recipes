@@ -4,12 +4,13 @@ struct QuizCollections : View {
     
     @State var quiz : QuizzGenerater
     @State private var progress: Float = 0.0
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body : some View {
         VStack {
-           
+            
             VStack {
-                if !quiz.retakeButton() {
+                if !quiz.overView() {
                     Text("Your Score")
                         .font(.title)
                         .foregroundColor(.brown)
@@ -19,13 +20,13 @@ struct QuizCollections : View {
                         .foregroundColor(.brown)
                 }
             }
-
+            
             Spacer()
             
             VStack {
                 VStack(alignment: .leading,spacing: 5) {
                     
-                    if quiz.retakeButton() {
+                    if quiz.overView() {
                         let score = quiz.totalScore()
                         let result = quiz.scoreCheck(score: score)
                         
@@ -51,37 +52,58 @@ struct QuizCollections : View {
                 
                 ForEach(Array(quiz.quizAnswerButton().enumerated()), id: \.offset) { index, question in
                     Button(action: {
-                        let UserAnswer = question
-                        let result = quiz.checkUserAnswer(UserAnswer)
+                        let userAnswer = question
+                        let result = quiz.checkUserAnswer(userAnswer)
                         
                         if result {
                             quiz.audioPlay(sound: "C")
+                        } else {
+                            quiz.audioPlay(sound: "W")
                         }
-                                            
+                        
                         quiz.quizNextQuestion()
                         progress = quiz.showProgress()
-                   }) {
-                       HStack {
-                           Spacer()
-                           Text(question)
-                               .fontWeight(.semibold)
-                               .foregroundColor(.white)
-                           Spacer()
-                       }
-                       .padding()
-                       .background(.brown)
-                       .cornerRadius(10)
-                       .frame(width: 280, height: 50, alignment: .center)
-                   }
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text(question)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.white)
+                            Spacer()
+                        }
+                        .padding()
+                        .background(.brown)
+                        .cornerRadius(10)
+                        .frame(width: 280, height: 50, alignment: .center)
+                    }
+                    
+                    if quiz.overView() {
+                        Button(action : {
+                            presentationMode.wrappedValue.dismiss()
+                        })
+                        {
+                            HStack {
+                                Spacer()
+                                Text("Done")
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                                Spacer()
+                            }
+                            .padding()
+                            .background(.brown)
+                            .cornerRadius(10)
+                            .frame(width: 280, height: 50, alignment: .center)
+                        }
+                    }
+                }
+                
+                VStack {
+                    ProgressView(value: progress)
+                        .padding()
                 }
             }
             
-            VStack {
-                ProgressView(value: progress)
-                    .padding()
-            }
         }
-        
     }
 }
 

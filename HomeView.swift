@@ -5,13 +5,19 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             VStack {
-                VStack {
-                    Text("Welcome To Myanmar")
-                        .font(.system(size: 28))
+                VStack (spacing : 10) {
+                    Text("Welcome to Myanmar")
+                        .font(.system(size: 32))
                         .fontWeight(.bold)
+                    
+                    Text("Discover the rich culture and natural beauty")
+                        .font(.system(size: 20))
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(0)
                 }
                 .foregroundColor(Color.white)
-                .padding(.top,170)
+                .padding(.top,130)
                 .padding(.bottom, 50)
                 .lineSpacing(19)
                 
@@ -29,7 +35,7 @@ struct HomeView: View {
                 .padding(.bottom, 150)
             }
             .background(
-                Image("logo1")
+                Image("home")
             )
         }
     }
