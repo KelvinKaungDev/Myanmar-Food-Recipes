@@ -11,5 +11,6 @@ struct QuizBrain : Hashable {
         self.question = question
         self.multipleChoice = multipleChoice
     }
+    
 }
 

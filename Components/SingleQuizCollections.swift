@@ -1,8 +1,8 @@
 import SwiftUI
 
-struct QuizCollections : View {
+struct SingleQuizCollections : View {
     
-    @State var quiz : QuizzGenerater
+    @State var quiz : SingleTopicQuiz
     @State private var progress: Float = 0.0
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -28,9 +28,9 @@ struct QuizCollections : View {
                     
                     if quiz.overView() {
                         let score = quiz.totalScore()
-                        let result = quiz.scoreCheck(score: score)
-                        
-                        Text(result)
+                        let total = quiz.quizzQuestionCount()
+        
+                        Text("Congrations! You finished quiz.You got \(score) out of \(total).")
                             .font(.system(size:25))
                             .padding(10)
                             .lineSpacing(3)
@@ -106,5 +106,6 @@ struct QuizCollections : View {
         }
     }
 }
+
 
 

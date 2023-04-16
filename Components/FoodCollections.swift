@@ -25,7 +25,7 @@ struct FoodCollections: View {
             Text(description)
                 .font(.title3)
                 .padding()
-                .lineLimit(3)
+                .lineLimit(4)
         }
         .background(Color.white)
         .cornerRadius(10)

@@ -6,6 +6,7 @@ struct FoodDetails: View {
     @State private var selectedTab = 0
     @State private var showHistory = false
        
+    var id : Int
     var img : String
     var title : String
     var topics : [[String]]
@@ -83,23 +84,42 @@ struct FoodDetails: View {
                         .padding(.top, 20)
                         .foregroundColor(.brown)
                     
-                    Text(topic[1])
+                    Image(topic[1])
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                        .padding(10)
+                    
+                    Text(topic[2])
                         .font(.title3)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.top, 2)
                         .foregroundColor(.brown)
                 }
             }
             .padding(20)
             .transition(.asymmetric(insertion: .scale, removal: .opacity))
+            
+            
+            VStack {
+                NavigationLink(destination: SingleQuizCollections(quiz: SingleTopicQuiz(topicNumber: id))) {
+                    Text("Take Quiz")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(.brown)
+                        .cornerRadius(10)
+                        .frame(width: 380, height: 50, alignment: .center)
+                }
+                .padding(.bottom, 20)
+            }
         }
-        .padding(.top, 120)
+        .padding(.top, 140)
     }
 }
 
 struct FoodDetails_Previews: PreviewProvider {
     static var previews: some View {
-        FoodDetails(show: .constant(true), img: "", title: "", topics: [[""]], description: "")
+        FoodDetails(show: .constant(true), id: 0, img: "", title: "", topics: [[""]], description: "")
     }
 }
 

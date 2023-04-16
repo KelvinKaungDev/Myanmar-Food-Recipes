@@ -4,7 +4,7 @@ struct MenuView: View {
     
     @State var show = false
     @State var i : Int = 0
-    var quiz = QuizzGenerater()
+    var quiz = TotalQuiz()
     
     var foods = Food().foodCollections()
     
@@ -12,14 +12,14 @@ struct MenuView: View {
         
         if show {
             let getFood = Food().getFoods(i: i)
-            FoodDetails(show: $show, img: getFood.image, title: getFood.title, topics: getFood.topic, description : getFood.description)
+            FoodDetails(show: $show, id: getFood.id, img: getFood.image, title: getFood.title, topics: getFood.topic, description : getFood.description)
         }
         
         if !show {
             ZStack {
                 ScrollView(showsIndicators: false) {
                     
-                    Text("Myanmar Articles")
+                    Text("Articles")
                         .font(.system(size: 35))
                         .fontWeight(.bold)
                         .foregroundColor(.brown)
@@ -32,9 +32,9 @@ struct MenuView: View {
                             ForEach(Array(foods.enumerated()), id: \.offset) { index, food in
                                 GeometryReader { geometry in
                                     FoodCollections(show: $show, id: index, img: food.image, title: food.title, description: food.description)
-                                        .rotation3DEffect(Angle(degrees: (Double(geometry.frame(in: .global).minX) - 40) / -20), axis: (x: 0, y: 10.0, z: 0))
+                                        .rotation3DEffect(Angle(degrees: (Double(geometry.frame(in: .global).minX) - 40) / -30), axis: (x: 0, y: 10.0, z: 0))
                                 }
-                                .frame(width: 330, height: 400)
+                                .frame(width: 330, height: 420)
                                 .shadow(color: Color.gray.opacity(0.25), radius: 10, x: 0, y: 5)
                                 .onTapGesture {
                                     withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
@@ -44,7 +44,7 @@ struct MenuView: View {
                                 }
                             }
                         }
-                        .padding(20)
+                        .padding(25)
                         .animation(.easeInOut(duration: 0.5), value : show)
                     }.onAppear {
                         show = false
@@ -59,7 +59,7 @@ struct MenuView: View {
                         .padding(20)
                     
                     ZStack {
-                        NavigationLink(destination: QuizCollections(quiz: quiz)) {
+                        NavigationLink(destination: TotalQuizCollections(quiz: quiz)) {
                             VStack {
                                 VStack {
                                     

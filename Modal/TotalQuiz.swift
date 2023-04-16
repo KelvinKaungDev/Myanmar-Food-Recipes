@@ -1,7 +1,7 @@
 import AVFoundation
 import SwiftUI
 
-struct QuizzGenerater {
+struct TotalQuiz {
     
     var quizzNumber = 0
     var score : Int = 0
@@ -21,7 +21,7 @@ struct QuizzGenerater {
         QuizBrain(question: "Where is Tasmania located?", multipleChoice: ["Indonesia", "Australia", "Scotland"], answer: "Australia", sound : true),
         QuizBrain(question: "Your Total Score is", multipleChoice: ["RETAKE"], answer: "", sound : false)
     ]
-    
+
     func quizzQuestionCount() -> Int {
         return quizs.count - 1
     }
@@ -80,7 +80,6 @@ struct QuizzGenerater {
     }
     
     func scoreCheck(score : Int) -> String {
-        
         switch score {
             case 8..<10 :
                 return "Gread Job Your Score is \(score). Now You know famous about Myanmar"
@@ -89,7 +88,6 @@ struct QuizzGenerater {
             default :
                 return "Sorry You Score is \(score). You should read article and retake"
         }
-        
     }
     
     mutating func audioPlay(sound : String) {
